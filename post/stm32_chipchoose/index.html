@@ -1,0 +1,220 @@
+<html>
+<head>
+    <meta charset="utf-8"/>
+<meta name="description" content=""/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+<title>STM32型号命名方法及对应启动文件的选择 | 李万鑫的博客</title>
+
+<link rel="shortcut icon" href="https://www.liwanxin.net/favicon.ico?v=1678633224117">
+
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://www.liwanxin.net/styles/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dockerfile.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dart.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script>
+<!-- DEMO JS -->
+<!--<script src="media/scripts/index.js"></script>-->
+
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css">
+</head>
+<body>
+<div class="main gt-bg-theme-color-first">
+    <nav class="navbar navbar-expand-lg">
+    <div class="navbar-brand">
+        <img class="user-avatar" src="/images/avatar.png" alt="头像">
+        <div class="site-name gt-c-content-color-first">
+            李万鑫的博客
+        </div>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto" style="text-align: center">
+            
+                <div class="nav-item">
+                    
+                        <a href="/" class="menu gt-a-link">
+                            首页
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/post/about" class="menu gt-a-link">
+                            关于
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/archives" class="menu gt-a-link">
+                            归档
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/tags" class="menu gt-a-link">
+                            标签
+                        </a>
+                    
+                </div>
+            
+        </div>
+        <div style="text-align: center">
+            <form id="gridea-search-form" style="position: relative" data-update="1678633224117" action="/search/index.html">
+                <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+                <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+        </div>
+    </div>
+</nav>
+
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    STM32型号命名方法及对应启动文件的选择
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2019-06-14 ·
+                    </time>
+                    
+                        <a href="https://www.liwanxin.net/tag/m6uoZ00mH/" class="post-tags">
+                            # STM32
+                        </a>
+                    
+                </div>
+                <div class="post-content">
+                    <p>意法半导体公司出品的STM32系列芯片型号非常之多，本文主要针对干放提供的芯片型号的命名方法进行总结，同时对建立工程时所需要选择的启动文件进行的选择方法进行介绍。</p>
+<!--more-->
+<h1 id="stm32系列芯片命名方法">STM32系列芯片命名方法</h1>
+<p><img src="https://www.liwanxin.net/post-images/1646577035194.png" alt="" loading="lazy"><br>
+通过查阅意法半导体提供的《STM8及STM32选型手册》，我们可以从中找到如下的型号命名方法的表格。</p>
+<p>该表格针对STM8系列和STM3系列做出了明确的说明，名称各部分命名规则如下：</p>
+<ul>
+<li>第1部分STM8和STM32表示该产品的系列名称，STM8为意法半导体的8位MCU产品，STM32为意法半导体的32位MCU产品。</li>
+<li>第2部分是针对产品类别做出区分，常见的为F与L，F表示基础型，L表示超低功耗型。</li>
+<li>第3部分为具体的产品系列区分，如051、103、429等，该部分具体设计到产品的内核与外设功能，如051为入门级的M0内核产品，103为基础型的M3内核产品，429位高性能切带有DSP与FPU的M4内核产品，该部分随着STM系列的不断发展与技术进步不断扩充，F0、F1、F4系列都已在各自定位的市场上广泛应用，近年来，F7及H7系列的扩充也更进一步完善了STM32的产品体系。</li>
+<li>第4部分主要表示芯片的引脚数目，引脚更多的I/O可以方便使用者更好的进行外扩和实现更复杂的功能，但成本与电路板体积会对应增加，所以做项目时也应充分考虑到这些因素，不要一味的追求实用最新、功能与外设更强大的芯片。常用到的有C代表48引脚，R代表64引脚，V代表100引脚，Z表示144引脚，I代表174引脚，B代表208引脚，N代表216引脚。</li>
+<li>第5部分主要表示芯片的FLASH的容量大小，该部分在选型时也是容易忽略的一个地方，在硬件先于软件的项目中也需要注意该问题，提前估计程序的复杂度，同时也做好FLASH不够的后手（基本STM32对于FLASH不同的同类别型号是pin to pin兼容的，大大降低了该部分风险）。一般常见的为6代表32KB,8代表64KB，B代表128KB，C代表256KB，E代表512KB，G代表1024KB，I代表2048KB。<br>
+<strong>该部分也与后续的STM32F10x系列的启动文件选型有着直接的关系</strong>。</li>
+<li>第6部分表示芯片的封装型号，常见的为T，代表QFN的贴片封装。</li>
+<li>第7部分表示芯片的温度范围，常见的6代表等级A，即-40~85℃。</li>
+</ul>
+<h1 id="stm32f10x系列启动文件的选择">STM32F10x系列启动文件的选择</h1>
+<p>在简历工程文件的时候，经常会设计到启动文件的选择，下文以STM32F10x启动文件的选择为例，介绍启动文件的选择方法。<br>
+在固件库文件的复制过程中，我们会发现STM32F10x 3.5.0固件库提供了8项启动文件的.s文件供我们选择，其具体区别和使用如下：</p>
+<ul>
+<li>startup_stm32f10x_cl.s：该文件适用于互联性器件，如F105xx及F107xx系列芯片。</li>
+<li>startup_stm32f10x_ld_vl.s：该文件适用于小容量（16KB~32KB）的F100xx系列芯片。</li>
+<li>startup_stm32f10x_md_vl.s：该文件适用于中容量（64KB~128KB）的F100xx系列芯片。</li>
+<li>startup_stm32f10x_hd_vl.s：该文件适用于大容量（256KB~512KB）的F100xx系列芯片。</li>
+<li>startup_stm32f10x_ld.s：该文件适用于小容量（16KB~32KB）的F101xx，F102xx，F103xx系列芯片。</li>
+<li>startup_stm32f10x_md.s：该文件适用于中容量（64KB~128KB）的F101xx，F102xx，F103xx系列芯片。</li>
+<li>startup_stm32f10x_hd.s：该文件适用于大容量（256KB~512KB）的F101xx，F102xx，F103xx系列芯片。</li>
+<li>startup_stm32f10x_xl.s：该文件适用于超大容量（512KB~1024KB）的F101xx，F102xx，F103xx系列芯片。</li>
+</ul>
+<p>在使用时需注意芯片的产品系列与具体的FLASH容量大小来对启动文件进行正确的选择。</p>
+
+                </div>
+            </article>
+        </div>
+
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://www.liwanxin.net/post/K968ggxPv/" class="post-title gt-a-link">
+                    Altium Designer软件常用快捷键及说明(2-PCB操作篇)
+                </a>
+            </div>
+        
+
+        
+            <span id="/post/stm32_chipchoose/" class="leancloud_visitors" data-flag-title="STM32型号命名方法及对应启动文件的选择">
+                <em class="post-meta-item-text">阅读量 </em>
+                <i class="leancloud-visitors-count">0</i>
+            </span>
+        
+
+        
+
+        
+            <script src='https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js'></script>
+
+<style>
+	div#vcomments{
+		width:100%;
+		max-width: 1000px;
+		padding: 2.5%
+	}
+</style>
+
+
+	<div id="vcomments"></div>
+
+<script>
+	new Valine({
+		el: '#vcomments',
+		appId: '4wH9nvKkzgbwKO4Kq9cphrPS-gzGzoHsz',
+		appKey: 'sxt6oYqBLtromtoyDdKoC9Iw',
+		avatar: 'monsterid',
+		pageSize: 5,
+		recordIp: true,
+		placeholder: '欢迎评论~',
+		visitor: true,
+	});
+</script>
+
+        
+
+        <div class="site-footer gt-c-content-color-first">
+    <div class="slogan gt-c-content-color-first">不务正业的电子工程师</div>
+    <div class="social-container">
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    </div>
+    <div class="footer-info">
+        Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+    </div>
+    <div>
+        Theme by <a href="https://imhanjie.com/" target="_blank">imhanjie</a>, Powered by <a
+                href="https://github.com/getgridea/gridea" target="_blank">Gridea | <a href="https://www.liwanxin.net/atom.xml" target="_blank">RSS</a></a>
+    </div>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+    </div>
+</div>
+</body>
+</html>

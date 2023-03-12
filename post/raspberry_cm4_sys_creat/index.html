@@ -1,0 +1,238 @@
+<html>
+<head>
+    <meta charset="utf-8"/>
+<meta name="description" content=""/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+<title>树莓派CM4(EMMC版本)系统镜像烧录 | 李万鑫的博客</title>
+
+<link rel="shortcut icon" href="https://www.liwanxin.net/favicon.ico?v=1678633224117">
+
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://www.liwanxin.net/styles/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dockerfile.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dart.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script>
+<!-- DEMO JS -->
+<!--<script src="media/scripts/index.js"></script>-->
+
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css">
+</head>
+<body>
+<div class="main gt-bg-theme-color-first">
+    <nav class="navbar navbar-expand-lg">
+    <div class="navbar-brand">
+        <img class="user-avatar" src="/images/avatar.png" alt="头像">
+        <div class="site-name gt-c-content-color-first">
+            李万鑫的博客
+        </div>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto" style="text-align: center">
+            
+                <div class="nav-item">
+                    
+                        <a href="/" class="menu gt-a-link">
+                            首页
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/post/about" class="menu gt-a-link">
+                            关于
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/archives" class="menu gt-a-link">
+                            归档
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/tags" class="menu gt-a-link">
+                            标签
+                        </a>
+                    
+                </div>
+            
+        </div>
+        <div style="text-align: center">
+            <form id="gridea-search-form" style="position: relative" data-update="1678633224117" action="/search/index.html">
+                <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+                <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+        </div>
+    </div>
+</nav>
+
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    树莓派CM4(EMMC版本)系统镜像烧录
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2022-02-11 ·
+                    </time>
+                    
+                        <a href="https://www.liwanxin.net/tag/37SeIAI7a/" class="post-tags">
+                            # Linux
+                        </a>
+                    
+                        <a href="https://www.liwanxin.net/tag/qtJmbvqCz/" class="post-tags">
+                            # 树莓派
+                        </a>
+                    
+                </div>
+                <div class="post-content">
+                    <h1 id="raspberry-os-下载">raspberry os 下载</h1>
+<ol>
+<li>
+<p>访问如下网址，选择合适版本的系统镜像，并下载至本地。(此处可选择下载torrent并使用迅雷打开torrent下载镜像)</p>
+<p><a href="https://www.raspberrypi.com/software/operating-systems/">Operating system images – Raspberry Pi</a></p>
+</li>
+<li>
+<p>下载完成后在本地使用解压软件对对应压缩包解压，镜像为.img文件格式。</p>
+</li>
+</ol>
+<h1 id="img烧录至cm4">img烧录至CM4</h1>
+<h2 id="烧录工具准备">烧录工具准备</h2>
+<ol>
+<li>
+<p>下载并安装Raspberry Pi Imager软件用以烧录镜像至emmc。（也可使用Win32DiskImager等类似功能软件）</p>
+<p><a href="https://www.raspberrypi.com/software/">Raspberry Pi OS – Raspberry Pi</a></p>
+</li>
+<li>
+<p>下载rpiboot驱动及引导识别软件，使电脑识别出cm4上的emmc为U盘模式。</p>
+<p><a href="https://github.com/raspberrypi/usbboot/tree/master/win32/rpiboot_setup.exe">https://github.com/raspberrypi/usbboot/tree/master/win32/rpiboot_setup.exe</a></p>
+</li>
+</ol>
+<h2 id="烧录系统">烧录系统</h2>
+<ol>
+<li>将CM4插接在CM4 i/o扩展板上，并使用跳线帽短接J2跳线左侧第一组排针。（功能如IO板丝印表示：Fit jumper to disable emmc boot）<br>
+<img src="https://www.liwanxin.net/post-images/1646220222789.png" alt="" loading="lazy"></li>
+<li>使用J19端口对扩展板供电，并使用右下角J11 USB Slave接口连接电脑USB。</li>
+<li>可在windows的控制面板-&gt;硬件和声音-&gt;设备和打印机中查看到识别出了cm4为“BCM2711 Boot”设备。<br>
+<img src="https://www.liwanxin.net/post-images/1646220251469.png" alt="" loading="lazy"></li>
+<li>打开rpiboot软件，等待命令行自动执行完毕后，会发现已经将emmc识别成盘符。<br>
+<img src="https://www.liwanxin.net/post-images/1646220284069.png" alt="" loading="lazy"><br>
+如下图，我使用的cm4的emmc为8GB,系统识别并指定盘符为G盘。<br>
+<img src="https://www.liwanxin.net/post-images/1646189973066.png" alt="" loading="lazy"></li>
+<li>打开Raspberry pi imager软件，并点击CHOOSE OS选择镜像文件，此处我们选择”use custom”选择上述步骤中下载好的镜像。<br>
+<img src="https://www.liwanxin.net/post-images/1646220322698.png" alt="" loading="lazy"></li>
+<li>点击CHOOSE STORAGE指定对应的emmc识别出的盘符。</li>
+<li>点击WRITE等待系统烧录完成。</li>
+</ol>
+<h2 id="注意事项">注意事项</h2>
+<ol>
+<li>在烧录完成的BOOT盘符中新建文件“SSH”（无后缀名），使系统启动时默认开启SSH，方便登录调试。</li>
+<li>烧录完成后请去除跳线帽，保证系统可正常启动。</li>
+<li>IO扩展板上的SLAVE USB仅在烧录时与电脑通信使用，无法作为CM4的USB使用。</li>
+</ol>
+
+                </div>
+            </article>
+        </div>
+
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://www.liwanxin.net/post/cmake_install/" class="post-title gt-a-link">
+                    Ubuntu编译安装CMake方法及过程
+                </a>
+            </div>
+        
+
+        
+            <span id="/post/raspberry_cm4_sys_creat/" class="leancloud_visitors" data-flag-title="树莓派CM4(EMMC版本)系统镜像烧录">
+                <em class="post-meta-item-text">阅读量 </em>
+                <i class="leancloud-visitors-count">0</i>
+            </span>
+        
+
+        
+
+        
+            <script src='https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js'></script>
+
+<style>
+	div#vcomments{
+		width:100%;
+		max-width: 1000px;
+		padding: 2.5%
+	}
+</style>
+
+
+	<div id="vcomments"></div>
+
+<script>
+	new Valine({
+		el: '#vcomments',
+		appId: '4wH9nvKkzgbwKO4Kq9cphrPS-gzGzoHsz',
+		appKey: 'sxt6oYqBLtromtoyDdKoC9Iw',
+		avatar: 'monsterid',
+		pageSize: 5,
+		recordIp: true,
+		placeholder: '欢迎评论~',
+		visitor: true,
+	});
+</script>
+
+        
+
+        <div class="site-footer gt-c-content-color-first">
+    <div class="slogan gt-c-content-color-first">不务正业的电子工程师</div>
+    <div class="social-container">
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    </div>
+    <div class="footer-info">
+        Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+    </div>
+    <div>
+        Theme by <a href="https://imhanjie.com/" target="_blank">imhanjie</a>, Powered by <a
+                href="https://github.com/getgridea/gridea" target="_blank">Gridea | <a href="https://www.liwanxin.net/atom.xml" target="_blank">RSS</a></a>
+    </div>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,267 @@
+<html>
+<head>
+    <meta charset="utf-8"/>
+<meta name="description" content=""/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+<title>Ubuntu编译安装CMake方法及过程 | 李万鑫的博客</title>
+
+<link rel="shortcut icon" href="https://www.liwanxin.net/favicon.ico?v=1678633224117">
+
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://www.liwanxin.net/styles/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dockerfile.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dart.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script>
+<!-- DEMO JS -->
+<!--<script src="media/scripts/index.js"></script>-->
+
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css">
+</head>
+<body>
+<div class="main gt-bg-theme-color-first">
+    <nav class="navbar navbar-expand-lg">
+    <div class="navbar-brand">
+        <img class="user-avatar" src="/images/avatar.png" alt="头像">
+        <div class="site-name gt-c-content-color-first">
+            李万鑫的博客
+        </div>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto" style="text-align: center">
+            
+                <div class="nav-item">
+                    
+                        <a href="/" class="menu gt-a-link">
+                            首页
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/post/about" class="menu gt-a-link">
+                            关于
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/archives" class="menu gt-a-link">
+                            归档
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/tags" class="menu gt-a-link">
+                            标签
+                        </a>
+                    
+                </div>
+            
+        </div>
+        <div style="text-align: center">
+            <form id="gridea-search-form" style="position: relative" data-update="1678633224117" action="/search/index.html">
+                <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+                <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+        </div>
+    </div>
+</nav>
+
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    Ubuntu编译安装CMake方法及过程
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2021-07-15 ·
+                    </time>
+                    
+                        <a href="https://www.liwanxin.net/tag/uxlsjnYM-/" class="post-tags">
+                            # cmake
+                        </a>
+                    
+                        <a href="https://www.liwanxin.net/tag/37SeIAI7a/" class="post-tags">
+                            # Linux
+                        </a>
+                    
+                </div>
+                <div class="post-content">
+                    <blockquote>
+<p>操作系统：ubuntu 20.04<br>
+安装CMake版本：v3.20.3</p>
+</blockquote>
+<p>因ubuntu20apt-get直接安装的Cmake版本偏低，所以考虑采用编译安装的方式安装最新版的CMake，方法参考及报错注意如下文，记录供参考。</p>
+<hr>
+<ol>
+<li>
+<p>进入网址https://cmake.org/download/，在网页platform处选择Unix/Linux Source后对应的file下载tar.gz压缩包。</p>
+</li>
+<li>
+<p>进入下载的目录找到对应的文件，右键提取到此处。</p>
+<p>或在目录下终端输入</p>
+<pre><code>tar zxvf cmake压缩包名称.tar.gz
+</code></pre>
+</li>
+<li>
+<p>进入解压后的目录，执行./bootstrap</p>
+<pre><code>sudo ./bootstrap
+</code></pre>
+</li>
+<li>
+<p>如果安装过程中报错如下，则为系统缺少gcc,g++，需要执行下列进行build-essential安装，安装后重新执行上述3步骤。</p>
+<pre><code>---------------------------------------------
+CMake 3.20.3, Copyright 2000-2021 Kitware, Inc. and Contributors
+---------------------------------------------
+Error when bootstrapping CMake:
+Cannot find appropriate C compiler on this system.
+Please specify one using environment variable CC.
+See cmake_bootstrap.log for compilers attempted.
+
+---------------------------------------------
+Log of errors: /home/liwx/下载/cmake-3.20.3/Bootstrap.cmk/cmake_bootstrap.log
+---------------------------------------------
+</code></pre>
+<pre><code>sudo apt-get install build-essential
+</code></pre>
+</li>
+<li>
+<p>如果安装过程中报错如下，则为缺少openssl，需要执行下列进行libssl-dev安装，安装后重新执行上述3步骤。</p>
+<pre><code>-- Could NOT find OpenSSL, try to set the path to OpenSSL root folder in the system variable OPENSSL_ROOT_DIR (missing: OPENSSL_CRYPTO_LIBRARY OPENSSL_INCLUDE_DIR) 
+CMake Error at Utilities/cmcurl/CMakeLists.txt:511 (message):
+  Could not find OpenSSL.  Install an OpenSSL development package or
+  configure CMake with -DCMAKE_USE_OPENSSL=OFF to build without OpenSSL.
+</code></pre>
+<pre><code>sudo apt-get install libssl-dev
+</code></pre>
+</li>
+<li>
+<p>若提示如下，则证明构建成功。</p>
+<pre><code>CMake has bootstrapped.  Now run make.
+</code></pre>
+</li>
+<li>
+<p>执行make编译。</p>
+<pre><code>sudo make
+</code></pre>
+</li>
+<li>
+<p>编译完成后执行下列指令进行安装。</p>
+<pre><code>sudo make install
+</code></pre>
+</li>
+<li>
+<p>安装完成后查看cmake版本确认安装成功，执行后提示如下。</p>
+<pre><code>cmake --version
+</code></pre>
+<pre><code>cmake version 3.20.3
+
+CMake suite maintained and supported by Kitware (kitware.com/cmake).
+</code></pre>
+</li>
+</ol>
+
+                </div>
+            </article>
+        </div>
+
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://www.liwanxin.net/post/solve_ros_timeout/" class="post-title gt-a-link">
+                    解决ROS安装执行rosdep update 超时问题
+                </a>
+            </div>
+        
+
+        
+            <span id="/post/cmake_install/" class="leancloud_visitors" data-flag-title="Ubuntu编译安装CMake方法及过程">
+                <em class="post-meta-item-text">阅读量 </em>
+                <i class="leancloud-visitors-count">0</i>
+            </span>
+        
+
+        
+
+        
+            <script src='https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js'></script>
+
+<style>
+	div#vcomments{
+		width:100%;
+		max-width: 1000px;
+		padding: 2.5%
+	}
+</style>
+
+
+	<div id="vcomments"></div>
+
+<script>
+	new Valine({
+		el: '#vcomments',
+		appId: '4wH9nvKkzgbwKO4Kq9cphrPS-gzGzoHsz',
+		appKey: 'sxt6oYqBLtromtoyDdKoC9Iw',
+		avatar: 'monsterid',
+		pageSize: 5,
+		recordIp: true,
+		placeholder: '欢迎评论~',
+		visitor: true,
+	});
+</script>
+
+        
+
+        <div class="site-footer gt-c-content-color-first">
+    <div class="slogan gt-c-content-color-first">不务正业的电子工程师</div>
+    <div class="social-container">
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    </div>
+    <div class="footer-info">
+        Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+    </div>
+    <div>
+        Theme by <a href="https://imhanjie.com/" target="_blank">imhanjie</a>, Powered by <a
+                href="https://github.com/getgridea/gridea" target="_blank">Gridea | <a href="https://www.liwanxin.net/atom.xml" target="_blank">RSS</a></a>
+    </div>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+    </div>
+</div>
+</body>
+</html>
